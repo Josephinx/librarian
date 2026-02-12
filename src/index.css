@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Space Grotesk', sans-serif;
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+}
+
+/* Light mode (default) */
+:root {
+  --color-bg: #fafafa;
+  --color-bg-secondary: #f1f5f9;
+  --color-fg: #0f172a;
+  --color-fg-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-card-bg: #ffffff;
+  --color-card-border: #e2e8f0;
+}
+
+/* Dark mode */
+.dark {
+  --color-bg: #09090b;
+  --color-bg-secondary: #111118;
+  --color-fg: #f1f5f9;
+  --color-fg-muted: #94a3b8;
+  --color-border: #1e293b;
+  --color-card-bg: #111118;
+  --color-card-border: #1e293b;
+}
+
+/* Base resets */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Tracked uppercase label utility */
+.tracked-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+/* Ghost button */
+.ghost-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.ghost-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.ghost-btn.selected {
+  border-color: var(--color-accent);
+  background-color: rgba(99, 102, 241, 0.05);
+}
+
+/* Survey animations */
+@keyframes fadeSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.question-exit {
+  animation: fadeSlideOut 200ms ease-out forwards;
+}
+
+.question-enter {
+  animation: fadeSlideIn 300ms ease-out 100ms both;
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 3px;
+  background-color: var(--color-accent);
+  transition: width 300ms ease;
+}
+
+/* Analysing pulse */
+@keyframes pulseMuted {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.analysing-pulse {
+  animation: pulseMuted 1.5s ease-in-out infinite;
+}
